@@ -1,0 +1,136 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,700;1,400&display=swap');
+body{
+    margin: 0px;
+    box-sizing: border-box;
+    
+}
+
+/* Menu superiot com logo */
+.cabecalho{
+    background-color: #EC362D;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 37px;
+    color: #FFFFFF ;
+
+    width: auto;
+    height: 69px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Criação de quiz */
+
+
+.criarQuizz{
+    background-color: #FAFAFA;
+    width: auto;
+    height: 181px;
+    margin: 20px 18px 0px 17px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    border-radius: 10px;
+    
+}
+.criarQuizz div{
+    color: #B9B9B9;
+    font-size: 20px;
+    background-color: #FAFAFA;
+    width: 250px;
+    height: 80px;
+    margin-top: 7px;
+    padding-top: 30px;
+    
+}
+.criarQuizz button{
+    
+    width: 136px;
+    height: 40px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    border: 2px dashed #EC362D;
+    border-radius: 30%;
+    color: #EC362D;
+    
+}
+
+/* Menu de todos o quizzes*/
+.telaQuizzes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    background-color: #FFFFFF;
+    width: auto;
+    margin: 20px 18px 0px 17px;  
+}
+
+.card-quizz{
+    width: 340px;
+    height: 181px;
+    margin-top: 5px;
+    border-radius: 10px;
+    position: relative; 
+}
+
+h3 {
+    position: absolute;
+    margin-left: 70px;
+    margin-top: -30px;
+    color: #FAFAFA;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-size: 19px;
+}
+
+h2 {
+    color: #000;
+    font-size: 20px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    margin-left: 20px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    
+}
+
+img {
+    width: 340px;
+    height: 181px;
+    border-radius: 10px;
+     
+} 
+
+/*site responsivo */
+@media (min-width:1100px){
+    .telaQuizzes{
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    
+    }
+    .card-quizz{
+        margin-left: 15px;
+        margin-top: 12px;
+        
+    }
+    .criarQuizz{
+        width: 1051px;
+        margin-left: 170px;
+        
+    }
+    h2 {
+        margin-left: 170px;
+    }
+}
