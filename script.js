@@ -71,7 +71,7 @@ function renderizarQuizz(resposta){
             </div>
         </div>
         `
-        listaPerguntas.innerHTML += divDePerguntas;
+        listaPerguntas.innerHTML = divDePerguntas;
         console.log(divDePerguntas);
     }
 
