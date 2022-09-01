@@ -41,13 +41,14 @@ function renderizarQuizz(resposta){
     
 
     const listaPerguntas = document.querySelector(".main");
+    let divDePerguntas = '';
 
     for( i = 0; i < perguntas.length; i++) {
-        listaPerguntas.innerHTML += `
+        divDePerguntas += `
         <div class="perguntas-quizz">       
             <div class="pergunta">${perguntas[i].title}</div>
-                            
-        </div>
+            <div class="alternativas">           
+        
         `
         respostas = perguntas[i].answers;
 
@@ -55,16 +56,23 @@ function renderizarQuizz(resposta){
 
         // const listaRespostas = document.querySelector(".perguntas-quizz");
 
-        // for( i = 0; i < respostas.length; i++){
-        //     listaRespostas.innerHTML += `
-        //     <div class="alternativas">
-        //         <div class="alt">
-        //             <img src="${respostas[i].image}">
-        //             <p>${respostas[i].text}</p>
-        //         </div>
-        //     </div>
-        //     `
-        // }
+        for( i2 = 0; i2 < respostas.length; i2++){
+            divDePerguntas += `
+            
+                <div class="alt">
+                    <img src="${respostas[i2].image}">
+                    <p>${respostas[i2].text}</p>
+                </div>
+            
+            `
+        }
+
+        divDePerguntas += `
+            </div>
+        </div>
+        `
+        listaPerguntas.innerHTML += divDePerguntas;
+        console.log(divDePerguntas);
     }
 
     
