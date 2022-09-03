@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,700;1,400&display=swap');
+
+
+
 .topo{
     display: flex;
     align-items: center;
@@ -16,25 +20,28 @@
     position: absolute;
     background-color: black;
     opacity: 0.6;
-    top: 0px;
+    top: 69px;
     left: 0px;
 }
 
-h1 {
+.topo>h1 {
     position:absolute;
     color: #FFFFFF;
+    font-size: 39px;
+    font-weight: 400;
 
 }
 
 .main{
     display: flex;
     flex-direction: column;
+    background-color: #E5E5E5;
 }
 
 .perguntas-quizz{
     width: 759px;
     height: 676px;
-    background-color: red;
+    background-color: #ffffff;
     margin: 42px auto;
     position:relative;
     display: flex;
@@ -53,6 +60,8 @@ h1 {
     position: absolute;
     top:27px;
     left: auto;
+    font-size: 23px;
+    font-weight: 700;
 }
 
 .alternativas {
@@ -64,7 +73,15 @@ h1 {
     flex-wrap: wrap;
 }
 
-.alt>img {
+.alt0, .alt1, .alt2, .alt3 {
+    position: relative;
+}
+
+.esbranquicada {
+    opacity: 0.5;
+}
+
+.alt0>img, .alt1>img, .alt2>img, .alt3>img {
     width: 330px;
     height: 175px;
     margin-left: 12px;
@@ -72,6 +89,13 @@ h1 {
     margin-top: 18px;
 }
 
-.alt>p{
+.alt0>p, .alt1>p, .alt2>p, .alt3>p{
     margin-left: 12px;
+    font-size: 20px;
+    font-weight: 700;
 }
+
+.true-false{
+    display: none;
+}
+
