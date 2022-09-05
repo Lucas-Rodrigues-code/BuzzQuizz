@@ -28,7 +28,7 @@ function selecionarTela2(res){
 
     idQuizzTela2 = res.id
 
-    console.log(idQuizzTela2);
+    //console.log(idQuizzTela2);
 
     function obterUmQuizz() {
         const promessa = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${idQuizzTela2}`);
@@ -54,14 +54,13 @@ function renderizarTela3() {
 
 let perguntas = [];
 let respostas = [];
-
-
-
-
+let niveis = [];
 
 function renderizarQuizz(resposta){
     dadosQuizz = resposta.data;
     const dadosTopo = document.querySelector(".topo");
+
+    console.log(resposta.data.questions);
 
     dadosTopo.innerHTML += `
         <img src="${dadosQuizz.image}"/>
@@ -71,7 +70,9 @@ function renderizarQuizz(resposta){
     
     perguntas = dadosQuizz.questions;
 
-    // console.log(perguntas);
+    niveis = dadosQuizz.levels;
+
+    //console.log(niveis);
     
 
     const listaPerguntas = document.querySelector(".main");
@@ -102,7 +103,7 @@ function renderizarQuizz(resposta){
         for(let i2 = 0; i2 < respostas.length; i2++){
             divDePerguntas += `
             
-                <div class="alt${i}" onclick="selecionarAlt${i}(this)">
+                <div class="alt${i}" onclick="selecionarResposta(this)">
                     <img src="${respostas[i2].image}">
                     <p>${respostas[i2].text}</p>
                     <div class="true-false">${respostas[i2].isCorrectAnswer}</div>
@@ -124,6 +125,8 @@ function renderizarQuizz(resposta){
 }
 
 
+// let respostaEscolhida = [];
+
 let resposta0;
 let resposta1;
 let resposta2;
@@ -131,152 +134,71 @@ let resposta3;
 
 let porcento;
 
+function selecionarResposta(resposta) {
+    //console.log(resposta.parentNode);
 
-function selecionarAlt0(altSelecionada0){
-    const selecionarTodas = document.querySelectorAll(".alt0");
+    const pergunta = resposta.parentNode;
 
-    // console.log(selecionarTodas);
+    const opcoesResposta = pergunta.children;
 
-    altSelecionada0.classList.add ('selecionada');
+    for( let i = 0; i < opcoesResposta.length; i++){
 
-    for(let i = 0; i < 4; i++){
-        if(selecionarTodas[i].classList.contains('selecionada') === false){
-            selecionarTodas[i].style.opacity = ('0.5');
+        if(!opcoesResposta[i].classList.contains("selecionada")) {
+            opcoesResposta[i].style.opacity = ('0.5');
         }
     }
 
-    const certoOuErrado = document.querySelectorAll(".alt0>p");
+    for( let i = 0; i < opcoesResposta.length; i++){
 
-    for(let i = 0; i < 4; i++){
-        if(respostas[i].isCorrectAnswer === true){
-            certoOuErrado[i].style.color = ('green');
+        if(opcoesResposta[i].classList.contains("selecionada")) {
+            console.log("já tem");
+            return;
+        }
+    }
+
+    resposta.classList.add('selecionada');
+    resposta.style.opacity = ("1");
+
+    
+
+    //console.log(certoOuErrado);
+
+    for(let i = 0; i < opcoesResposta.length; i++){
+
+        const certoOuErrado = opcoesResposta[i].childNodes[5].innerHTML;
+        const pResposta = opcoesResposta[i].childNodes[3];
+
+        if(certoOuErrado === "true"){
+
+            pResposta.style.color = ("green");
+           // certoOuErrado[i].style.color = ('green');
         } else {
-            certoOuErrado[i].style.color = ('red');
 
+            pResposta.style.color = ("red");
+           // certoOuErrado[i].style.color = ('red');
+        //    console.log(opcoesResposta[i].childNodes[3]);
         }
     }
 
-    
-    const resposta  = altSelecionada0.querySelector('.true-false').innerHTML;
+    // const resposta  = altSelecionada0.querySelector('.true-false').innerHTML;
 
-    if(resposta === 'true') {
-        resposta0 = 1;
-    } else {
-        resposta0 = 0;
-    }
+    // if(resposta === 'true') {
+    //     resposta0 = 1;
+    // } else {
+    //     resposta0 = 0;
+    // }
 
-    mostrarResultado();
-    
-}
+    console.log(pergunta.parentNode.nextElementSibling);
 
-function selecionarAlt1(altSelecionada1){
-    const selecionarTodas = document.querySelectorAll(".alt1");
+    const proximaPergunta = pergunta.parentNode.nextElementSibling
 
-    // console.log(selecionarTodas);
-
-    altSelecionada1.classList.add ('selecionada');
-
-    for(let i = 0; i < 4; i++){
-        if(selecionarTodas[i].classList.contains('selecionada') === false){
-            selecionarTodas[i].style.opacity = ('0.5');
-        }
-    }
-
-    const certoOuErrado = document.querySelectorAll(".alt1>p");
-
-    for(let i = 0; i < 4; i++){
-
-        if(respostas[i].isCorrectAnswer === true){
-            certoOuErrado[i].style.color = ('green');
-        } else {
-            certoOuErrado[i].style.color = ('red');
-
-        }
-    }
-    
-    const resposta  = altSelecionada1.querySelector('.true-false').innerHTML;
-   
-    if(resposta === 'true') {
-        resposta1 = 1;
-    } else {
-        resposta1 = 0;
-    }
-
-    mostrarResultado();
-
+    setTimeout(scroll, 2000, proximaPergunta);
 
 }
 
-function selecionarAlt2(altSelecionada2){
-    const selecionarTodas = document.querySelectorAll(".alt2");
-
-    // console.log(selecionarTodas);
-
-    altSelecionada2.classList.add ('selecionada');
-
-    for(let i = 0; i < 4; i++){
-        if(selecionarTodas[i].classList.contains('selecionada') === false){
-            selecionarTodas[i].style.opacity = ('0.5');
-        }
-    }
-
-    const certoOuErrado = document.querySelectorAll(".alt2>p");
-
-    for(let i = 0; i < 4; i++){
-        if(respostas[i].isCorrectAnswer === true){
-            certoOuErrado[i].style.color = ('green');
-        } else {
-            certoOuErrado[i].style.color = ('red');
-
-        }
-    }
-    
-    const resposta  = altSelecionada2.querySelector('.true-false').innerHTML;
-
-    if(resposta === 'true') {
-        resposta2 = 1;
-    } else {
-        resposta2 = 0;
-    }
-
-    mostrarResultado();
-
-}
-
-function selecionarAlt3(altSelecionada3){
-    const selecionarTodas = document.querySelectorAll(".alt3");
-
-    // console.log(selecionarTodas);
-
-    altSelecionada3.classList.add ('selecionada');
-
-    for(let i = 0; i < 4; i++){
-        if(selecionarTodas[i].classList.contains('selecionada') === false){
-            selecionarTodas[i].style.opacity = ('0.5');
-        }
-    }
-
-    const certoOuErrado = document.querySelectorAll(".alt3>p");
-
-    for(let i = 0; i < 4; i++){
-        if(respostas[i].isCorrectAnswer === true){
-            certoOuErrado[i].style.color = ('green');
-        } else {
-            certoOuErrado[i].style.color = ('red');
-
-        }
-    }
-
-    const resposta  = altSelecionada3.querySelector('.true-false').innerHTML
-
-    if(resposta === 'true') {
-        resposta3 = 1;
-    } else {
-        resposta3 = 0;
-    }
-
-    mostrarResultado();
-    
+function scroll(elemento) {
+        
+    elemento.scrollIntoView();
 }
 
 function mostrarResultado() {
@@ -286,6 +208,8 @@ function mostrarResultado() {
                 
             porcento = Math.round(100*(resposta0 + resposta1 + resposta2)/3);    
             
+            //console.log(porcento);
+
             renderizarResposta();
 
             }
@@ -295,20 +219,43 @@ function mostrarResultado() {
     }
 }
 
+
 function renderizarResposta() {
     const divResolts = document.querySelector(".resultado-botoes");
     divResolts.classList.remove("hidden");
 
+    console.log(porcento);
 
     const result = document.querySelector(".resultado-quizz");
 
-    result.innerHTML += `
-        <div class="resultado-topo">${porcento}% de acerto</div>
+    if(porcento === niveis[0].minValue && porcento < niveis[1].minvalue) {
+        result.innerHTML += `
+        <div class="resultado-topo">${porcento}% de acerto: ${niveis[0].title}</div>
         <div class="resultado-main">
-            <img src="cas.png" />
-            <div class="texto-resultado">fasdlkjflksdjdfasd fadsjfhasdfh lkjsdhfahd</div>
+            <img src="${niveis[0].image}" />
+            <div class="texto-resultado">${niveis[0].text}</div>
         </div>     
     `
+    } else if(porcento > niveis[1].minValue && porcento < niveis[2].minValue ) {
+        result.innerHTML += `
+        <div class="resultado-topo">${porcento}% de acerto: ${niveis[1].title}</div>
+        <div class="resultado-main">
+            <img src="${niveis[1].image}" />
+            <div class="texto-resultado">${niveis[1].text}</div>
+        </div>     
+    `
+    } else {
+        result.innerHTML += `
+        <div class="resultado-topo">${porcento}% de acerto: ${niveis[2].title}</div>
+        <div class="resultado-main">
+            <img src="${niveis[2].image}" />
+            <div class="texto-resultado">${niveis[2].text}</div>
+        </div>     
+    `
+    }
+
+      
+    
 
 }
 
@@ -358,9 +305,11 @@ function prosseguirParaCriarPerguntas() {
     quantasPerguntas = document.getElementById("perguntasQtd");
     quantosNiveis = document.getElementById("niveisQtd");
 
-    
+    console.log(quantasPerguntas.value, quantosNiveis.value);
 
+    renderizarPerguntasCriar();
 }
+
 
 
 //tela 3.2
@@ -369,7 +318,7 @@ function prosseguirParaCriarPerguntas() {
 function renderizarPerguntasCriar() {
     const divPerguntasCriar = document.querySelector(".perguntas32");
 
-    for( let i = 0; i < 2; i++) { //aqui a gente substitui o 2 por -> quantasPerguntas.value
+    for( let i = 0; i < quantasPerguntas.value; i++) {
         let divDeCadaPergunta = `
             <h1>Pergunta ${i+1}</h1>
             <input id="texto-pergunta-${i+1}" placeholder="Texto da pergunta" class="campo-input">
@@ -390,8 +339,6 @@ function renderizarPerguntasCriar() {
 
 
 }
-
-renderizarPerguntasCriar();
 
 //array com as perguntas
 let perguntasCriar = []
@@ -418,7 +365,7 @@ function prosseguirParaCriarNiveis() {
     const tela33 = document.querySelector(".tela33");
     tela33.classList.toggle("hidden");
     
-    for(let i = 0; i < 2; i++){ // aqui também substitui o 2 pela quantidade de perguntas
+    for(let i = 0; i < quantasPerguntas.value; i++){ 
         textoPergunta = document.getElementById(`texto-pergunta-${i+1}`)
         corPergunta = document.getElementById(`cor-pergunta-${i+1}`);
         
@@ -461,6 +408,9 @@ function prosseguirParaCriarNiveis() {
         }
     }
 
+    
+    renderizarNiverisCriar();
+
 }
 
 // console.log(perguntasCriar);
@@ -470,7 +420,7 @@ function prosseguirParaCriarNiveis() {
 function renderizarNiverisCriar () {
     const divNiveisCriar = document.querySelector(".perguntas33");
 
-    for( let i = 0; i < 2; i++) { //aqui a gente substitui o 2 por -> quantosNiveis.value
+    for( let i = 0; i < quantosNiveis.value; i++) { 
         let divDeCadaNivel = `
             <h1>Nível ${i+1}</h1>
             <input id="titulo-nivel-${i+1}" placeholder="Título do nível" class="campo-input">
@@ -482,7 +432,6 @@ function renderizarNiverisCriar () {
     }
 }
 
-renderizarNiverisCriar();
 
 // array com os níveis
 let niveisCriar = [];
@@ -501,7 +450,7 @@ function finalizarQuizz() {
     const tela34 = document.querySelector(".tela34");
     tela34.classList.toggle("hidden");
 
-    for( let i = 0; i < 2; i++){ //substitui o 2 por quantidade de niveis
+    for( let i = 0; i < quantosNiveis.value; i++){ 
         tituloNivel = document.getElementById(`titulo-nivel-${i+1}`);
         porcentagemMinima = document.getElementById(`porcentagem-minima-${i+1}`);
         imgNivel = document.getElementById(`img-nivel-${i+1}`);
@@ -515,10 +464,52 @@ function finalizarQuizz() {
         }
     }
 
+    enviarQuizz();
+
+    
+}
+
+//Enviar Quizz para API
+
+function enviarQuizz() {
+
+    const novoQuizz = {
+        title: tituloQuizz.value,
+        image: urlImg.value,
+        questions: perguntasCriar,
+        levels: niveisCriar
+    }
+
+    //const promessa = axios.post("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes", novoQuizz);
+    // promessa.then(renderizarFinalCriar)
+    // promessa.catch(erroAutenticação);
+
+    //console.log(novoQuizz);
+
+    renderizarFinalCriar();
+}
+
+function erroAutenticação() {
+    alert("Preencha os dados corretamente!");
 }
 
 
+
 // tela 3.4
+
+function renderizarFinalCriar() {
+    const acessarDivFinal = document.querySelector(".perguntas34")
+
+    let divFinal = `
+    <div class = "resultado-todo">
+        <img src="cas.png"/>
+        <h1>testeeeee</h1>
+    </div>    
+    `
+    acessarDivFinal.innerHTML = acessarDivFinal.innerHTML + divFinal;
+
+}
+
 
 // function acessarQuizz() {
     

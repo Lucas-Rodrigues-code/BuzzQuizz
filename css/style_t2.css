@@ -82,6 +82,7 @@
     position: relative;
 }
 
+
 .esbranquicada {
     opacity: 0.5;
 }
@@ -177,4 +178,21 @@
     font-size: 21px;
     font-weight: 400px;
     border: none;
+}
+
+
+.resultado-todo>img {
+    width: 500px;
+    height: auto;
+    position: relative;
+}
+
+.resultado-todo>h1 {
+
+    position:absolute;
+    color: #FFFFFF;
+    font-size: 39px;
+    font-weight: 400;
+    bottom: 9px;
+    left: 23px;
 }
