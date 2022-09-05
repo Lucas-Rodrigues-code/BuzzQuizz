@@ -15,15 +15,49 @@
 //     console.log(resposta.data);
 // }
 
+//tela 1
+
+let idQuizzTela2;
+
+function selecionarTela2(res){
+    const tela1 = document.querySelector(".tela1");
+    tela1.classList.toggle("hidden");
+
+    const tela2 = document.querySelector(".tela2");
+    tela2.classList.toggle("hidden");
+
+    idQuizzTela2 = res.id
+
+    console.log(idQuizzTela2);
+
+    function obterUmQuizz() {
+        const promessa = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${idQuizzTela2}`);
+        promessa.then ( renderizarQuizz );
+    }
+    
+    obterUmQuizz();
+}
+
+//botao criar quizz
+
+function renderizarTela3() {
+    const tela1 = document.querySelector(".tela1");
+    tela1.classList.toggle("hidden");
+
+    const tela31 = document.querySelector(".tela31");
+    tela31.classList.toggle("hidden");
+}
+
+
+
+//tela2
+
 let perguntas = [];
 let respostas = [];
 
-function obterUmQuizz() {
-    const promessa = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/10508');
-    promessa.then ( renderizarQuizz );
-}
 
-obterUmQuizz();
+
+
 
 function renderizarQuizz(resposta){
     dadosQuizz = resposta.data;
@@ -262,6 +296,10 @@ function mostrarResultado() {
 }
 
 function renderizarResposta() {
+    const divResolts = document.querySelector(".resultado-botoes");
+    divResolts.classList.remove("hidden");
+
+
     const result = document.querySelector(".resultado-quizz");
 
     result.innerHTML += `
@@ -269,12 +307,31 @@ function renderizarResposta() {
         <div class="resultado-main">
             <img src="cas.png" />
             <div class="texto-resultado">fasdlkjflksdjdfasd fadsjfhasdfh lkjsdhfahd</div>
-        </div>
-        
-        
-
+        </div>     
     `
 
+}
+
+// function reiniciarQuizz() {
+
+//     resposta0 = undefined;
+//     resposta1 = undefined;
+//     resposta2 = undefined;
+//     resposta3 = undefined;
+
+//     porcento = undefined;
+
+    
+
+// }
+
+
+function voltarPraHome() {
+    const voltarTela1 = document.querySelector(".tela1");
+    voltarTela1.classList.toggle("hidden");
+
+    const sumirTela2 = document.querySelector(".tela2");
+    sumirTela2.classList.toggle("hidden");
 }
 
 
@@ -290,22 +347,27 @@ let quantosNiveis;
 
 function prosseguirParaCriarPerguntas() {
 
+    const tela31 = document.querySelector(".tela31");
+    tela31.classList.toggle("hidden");
+
+    const tela32 = document.querySelector(".tela32");
+    tela32.classList.toggle("hidden");
+
     tituloQuizz = document.getElementById("titulo");
     urlImg = document.getElementById("url");
     quantasPerguntas = document.getElementById("perguntasQtd");
     quantosNiveis = document.getElementById("niveisQtd");
 
-
+    
 
 }
+
 
 //tela 3.2
 
 //criar as divs com as perguntas a partir da resposta dada com quantas perguntas
-function renderizarPerguntarCriar() {
+function renderizarPerguntasCriar() {
     const divPerguntasCriar = document.querySelector(".perguntas32");
-
-    console.log(divPerguntasCriar);
 
     for( let i = 0; i < 2; i++) { //aqui a gente substitui o 2 por -> quantasPerguntas.value
         let divDeCadaPergunta = `
@@ -329,7 +391,7 @@ function renderizarPerguntarCriar() {
 
 }
 
-renderizarPerguntarCriar();
+renderizarPerguntasCriar();
 
 //array com as perguntas
 let perguntasCriar = []
@@ -349,8 +411,14 @@ let imgIncorreta3;
 
 
 function prosseguirParaCriarNiveis() {
+
+    const tela32 = document.querySelector(".tela32");
+    tela32.classList.toggle("hidden");
+
+    const tela33 = document.querySelector(".tela33");
+    tela33.classList.toggle("hidden");
     
-    for(let i = 0; i < 2; i++){ 
+    for(let i = 0; i < 2; i++){ // aqui também substitui o 2 pela quantidade de perguntas
         textoPergunta = document.getElementById(`texto-pergunta-${i+1}`)
         corPergunta = document.getElementById(`cor-pergunta-${i+1}`);
         
@@ -395,7 +463,70 @@ function prosseguirParaCriarNiveis() {
 
 }
 
-console.log(perguntasCriar);
+// console.log(perguntasCriar);
+
+// tela 3.3
+
+function renderizarNiverisCriar () {
+    const divNiveisCriar = document.querySelector(".perguntas33");
+
+    for( let i = 0; i < 2; i++) { //aqui a gente substitui o 2 por -> quantosNiveis.value
+        let divDeCadaNivel = `
+            <h1>Nível ${i+1}</h1>
+            <input id="titulo-nivel-${i+1}" placeholder="Título do nível" class="campo-input">
+            <input id="porcentagem-minima-${i+1}" placeholder="% de acerto mínima" class="campo-input">
+            <input id="img-nivel-${i+1}" placeholder="URL da imagem do nível" class="campo-input">
+            <textarea id="desc-nivel-${i+1}" placeholder ="Descrição do nível" class="especial" rows="10" cols="40" maxlength="500"></textarea>
+        `
+        divNiveisCriar.innerHTML = divNiveisCriar.innerHTML + divDeCadaNivel;
+    }
+}
+
+renderizarNiverisCriar();
+
+// array com os níveis
+let niveisCriar = [];
+
+let tituloNivel;
+let porcentagemMinima;
+let imgNivel;
+let descNivel;
+
+
+function finalizarQuizz() {
+
+    const tela33 = document.querySelector(".tela33");
+    tela33.classList.toggle("hidden");
+
+    const tela34 = document.querySelector(".tela34");
+    tela34.classList.toggle("hidden");
+
+    for( let i = 0; i < 2; i++){ //substitui o 2 por quantidade de niveis
+        tituloNivel = document.getElementById(`titulo-nivel-${i+1}`);
+        porcentagemMinima = document.getElementById(`porcentagem-minima-${i+1}`);
+        imgNivel = document.getElementById(`img-nivel-${i+1}`);
+        descNivel = document.getElementById(`desc-nivel-${i+1}`);
+
+        niveisCriar[i] = {
+            title: tituloNivel.value,
+            image: imgNivel.value,
+            text: descNivel.value,
+            minValue: porcentagemMinima.value
+        }
+    }
+
+}
+
+
+// tela 3.4
+
+// function acessarQuizz() {
+    
+// }
+
+
+
+
 
 
 

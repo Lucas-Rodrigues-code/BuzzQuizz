@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,700;1,400&display=swap');
 
-
+.tela2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .topo{
     display: flex;
@@ -100,3 +104,77 @@
     display: none;
 }
 
+.resultado-botoes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.resultado-quizz {
+    background-color: #FFFFFF;
+    width: 759px;
+    height: 430px;    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.resultado-topo {
+    background-color:#EC362D;
+    width: 727px;
+    height: 99px;
+    margin-top: 18px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color:#FFFFFF;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.resultado-main {
+    margin-top:18px;
+    display: flex;
+}
+
+.resultado-main>img {
+    width: 364px;
+    height: 273px;
+}
+
+.texto-resultado {
+    width: 328px;
+    height: auto;
+    margin-left: 21px;
+}
+
+.botao-reiniciar-quizz {
+    background-color: #EC362D;
+    width: 260px;
+    height: 52px;
+    border-radius: 15px;
+    margin-top: 57px;
+    color:#FFFFFF;
+    font-size: 21px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+
+.voltar-pra-home {
+    background-color: #E5E5E5;
+    width: 260px;
+    height: 52px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #818181;
+    font-size: 21px;
+    font-weight: 400px;
+    border: none;
+}
